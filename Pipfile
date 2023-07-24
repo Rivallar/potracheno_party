@@ -8,6 +8,7 @@ django = "*"
 pytest-django = "*"
 pytest-factoryboy = "*"
 faker = "*"
+coverage = "*"
 
 [dev-packages]
 
