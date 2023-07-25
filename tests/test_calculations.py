@@ -1,7 +1,7 @@
 import pytest
 
 from party.calculations import find_name, cleanup_zeros, check_shares, check_money_spent, member_report,\
-    get_initial_balances, who_pays_who, calculate
+    get_initial_balances, who_pays_who, calculate, party_money_spent
 from party.models import Exchange
 
 
@@ -66,3 +66,10 @@ def test_calculate(small_party_setup):
     assert Exchange.objects.count() == 2
     assert Exchange.objects.get(giver=members[0]).amount == 5
     assert Exchange.objects.get(giver=members[1]).amount == 2
+
+
+def test_party_money_spent(create_party, small_party_setup):
+    empty_party = create_party
+    party, members = small_party_setup
+    assert party_money_spent(empty_party) == 0
+    assert party_money_spent(party) == 20

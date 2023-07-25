@@ -1,6 +1,8 @@
 import pytest
+from rest_framework.test import APIClient
 from pytest_factoryboy import register
 from tests.factories import PartyFactory, ItemFactory, MemberFactory, SharePartFactory
+from rest_framework.test import APIClient
 
 
 register(PartyFactory)
@@ -8,6 +10,8 @@ register(ItemFactory)
 register(MemberFactory)
 register(SharePartFactory)
 
+
+# models fixtures
 
 @pytest.fixture
 def create_party(db, party_factory):
@@ -39,6 +43,8 @@ def prepare_check_shares(db, item_factory, share_part_factory, member_factory):
 
     return members
 
+
+# calculation fixtures
 
 @pytest.fixture
 def prepare_bills(db, party_factory, member_factory):
@@ -77,3 +83,16 @@ def small_party_setup(db, party_factory, member_factory, item_factory, share_par
     share_part_factory.create(item=items[2], member=members[2], share=0.6)
 
     return party, members
+
+
+# endpoints fixtures
+
+@pytest.fixture
+def client():
+    return APIClient()
+
+
+@pytest.fixture
+def prepare_inactive_party(db, party_factory):
+    party_factory.create()
+    party_factory.create(is_active=False)

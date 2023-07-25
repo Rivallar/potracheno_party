@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.db.models import Sum
 
 from .models import SpareItem, Member, SharePart, Party, Exchange
+from party.calculations import party_money_spent
 
 
 @admin.register(Party)
@@ -12,10 +13,7 @@ class PartyAdmin(admin.ModelAdmin):
         return list(obj.members.all())
 
     def money_spent(self, obj):
-        total = obj.items.all().aggregate(total=Sum('total_price'))['total']
-        if total:
-            return round(total, 2)
-        return 0
+        return party_money_spent(obj)
 
 
 @admin.register(Member)

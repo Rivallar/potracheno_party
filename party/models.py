@@ -60,7 +60,7 @@ class SharePart(models.Model):
     """Represents relations between a member of a party and a spare item. Shows how much (in %) a member consumed an item."""
 
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
-    item = models.ForeignKey(SpareItem, on_delete=models.CASCADE)
+    item = models.ForeignKey(SpareItem, on_delete=models.CASCADE, related_name='parts')
 
     share = models.FloatField(default=0, validators=[MinValueValidator(0)])
 

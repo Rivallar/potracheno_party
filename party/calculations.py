@@ -140,3 +140,13 @@ def who_pays_who(members_dict, bills, party):
 
     cleanup_zeros(members_dict, bills)
     bills.sort()
+
+
+def party_money_spent(party):
+
+    """Calculates how much money was spent for a party based on sum of its items prices."""
+
+    total = party.items.all().aggregate(total=Sum('total_price'))['total']
+    if total:
+        return round(total, 2)
+    return 0

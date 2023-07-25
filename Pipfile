@@ -9,6 +9,7 @@ pytest-django = "*"
 pytest-factoryboy = "*"
 faker = "*"
 coverage = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
